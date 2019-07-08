@@ -54,14 +54,10 @@ local cleaningdofile SDP_DataCleaning
 *Zip all of the old versions of the datasets and the excel spreadsheets.  
 
 capture zipfile `CCRX'*, saving (Archived_Data/Archived_SDP_Data_$date.zip, replace)
-local methods "fster mster impl iud inj pill ec mc fc mod beads lam rhyth withd"
-local methods_short "fster mster impl iud inj pill ec mc fc beads"
 
 *Delete old versions: old version still saved in ArchivedData.zip
 capture shell rm `CCRX'*
 
-local methods_full "female_ster male_ster implants iud injectables pills ec male_condoms female_condoms mod beads lam rhythm withdrawal"
-local methods_short_full "female_ster male_ster implants iud injectables pills ec male_condoms female_condoms beads"
 *Create log
 log using "`CCRX'_SDP_DataChecking_$date.log ", replace
 
@@ -123,7 +119,6 @@ gen visitflag=0
 replace visitflag=1 if times_visited<3 & SDP_result!=1
 label variable visitflag "SDP visited less than 3 times and submitted but not complete"
 
-label define language_list 1 "english" 2 "amharic" 3 "oromiffa" 4 "tigringna" 96 "other" 
 * Generate GPS flag variable equal to 1 if data missing or > 6 meters
 gen gpsflag=0
 replace gpsflag=1 if (locationaccuracy>6 | locationaccuracy==. | locationlatitude==. | locationlongitude==.)
