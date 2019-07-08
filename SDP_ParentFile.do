@@ -27,7 +27,7 @@ global round “2020”
 local round "$round"
 
 global CCRX "ET2020"
-local CCRX "$CCRX"
+local CCRX "$CCRX" 
 
 * Set directory forcountry and round 
 global datadir 
@@ -123,6 +123,7 @@ gen visitflag=0
 replace visitflag=1 if times_visited<3 & SDP_result!=1
 label variable visitflag "SDP visited less than 3 times and submitted but not complete"
 
+label define language_list 1 "english" 2 "amharic" 3 "oromiffa" 4 "tigringna" 96 "other" 
 * Generate GPS flag variable equal to 1 if data missing or > 6 meters
 gen gpsflag=0
 replace gpsflag=1 if (locationaccuracy>6 | locationaccuracy==. | locationlatitude==. | locationlongitude==.)
