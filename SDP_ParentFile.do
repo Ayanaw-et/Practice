@@ -20,13 +20,13 @@ numlabel, add
 *******************************************************************************
 
 * Set local macros for country and round
-global country 
+global country “ET”
 local country "$country"
 
-global round 
+global round “2020”
 local round "$round"
 
-global CCRX "BFR5"
+global CCRX "ET2020"
 local CCRX "$CCRX"
 
 * Set directory forcountry and round 
@@ -49,15 +49,19 @@ global date=subinstr("`c_today'", " ", "",.)
 local todaystata=clock("`today'", "DMY")
 
 * Define the data cleaning do file name
-local cleaningdofile 
+local cleaningdofile SDP_DataCleaning
 
 *Zip all of the old versions of the datasets and the excel spreadsheets.  
 
 capture zipfile `CCRX'*, saving (Archived_Data/Archived_SDP_Data_$date.zip, replace)
+local methods "fster mster impl iud inj pill ec mc fc mod beads lam rhyth withd"
+local methods_short "fster mster impl iud inj pill ec mc fc beads"
 
 *Delete old versions: old version still saved in ArchivedData.zip
 capture shell rm `CCRX'*
 
+local methods_full "female_ster male_ster implants iud injectables pills ec male_condoms female_condoms mod beads lam rhythm withdrawal"
+local methods_short_full "female_ster male_ster implants iud injectables pills ec male_condoms female_condoms beads"
 *Create log
 log using "`CCRX'_SDP_DataChecking_$date.log ", replace
 
