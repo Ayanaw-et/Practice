@@ -20,14 +20,14 @@ numlabel, add
 *******************************************************************************
 
 * Set local macros for country and round
-global country 
+
 local country "$country"
 
-global round 
+global round “2020”
 local round "$round"
 
-global CCRX "BFR5"
-local CCRX "$CCRX"
+global CCRX "ET2020"
+local CCRX "$CCRX" 
 
 * Set directory forcountry and round 
 global datadir 
@@ -48,8 +48,6 @@ local c_today= "`today'"
 global date=subinstr("`c_today'", " ", "",.)
 local todaystata=clock("`today'", "DMY")
 
-* Define the data cleaning do file name
-local cleaningdofile 
 
 *Zip all of the old versions of the datasets and the excel spreadsheets.  
 
